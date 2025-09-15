@@ -7,8 +7,11 @@
 package io.sqlc;
 
 // SQLCipher version of database classes:
-import net.sqlcipher.*;
-import net.sqlcipher.database.*;
+import net.zetetic.database.*;
+import net.zetetic.database.sqlcipher.*;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteException;
 
 /* ** NOT USED in this plugin version:
 import android.database.Cursor;
@@ -73,7 +76,7 @@ class SQLiteAndroidDatabase
     //@Override
     static
     public void initialize(CordovaInterface cordova) {
-        SQLiteDatabase.loadLibs(cordova.getActivity());
+        System.loadLibrary("sqlcipher");
     }
 
     /**
@@ -83,7 +86,7 @@ class SQLiteAndroidDatabase
      * @param dbfile   The database File specification
      */
     void open(File dbfile, String key) throws Exception {
-        mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null);
+        mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null, null);
     }
 
     /**
@@ -94,18 +97,18 @@ class SQLiteAndroidDatabase
      */
     void open(File dbfile, String key, boolean cipherMigrate) throws Exception {
         try {
-            mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null);
+            mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null, null);
         } catch (RuntimeException e) {
             if (cipherMigrate) {
-                mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null, new SQLiteDatabaseHook() {
+                mydb = SQLiteDatabase.openOrCreateDatabase(dbfile, key, null, null, new SQLiteDatabaseHook() {
                     @Override
-                    public void preKey(SQLiteDatabase sqLiteDatabase) {
+                    public void preKey(SQLiteConnection sqLiteConnection) {
 
                     }
 
                     @Override
-                    public void postKey(SQLiteDatabase sqLiteDatabase) {
-                        sqLiteDatabase.query("PRAGMA cipher_migrate");
+                    public void postKey(SQLiteConnection sqLiteConnection) {
+                        sqLiteConnection.execute("PRAGMA cipher_migrate", null, null);
                     }
                 });
             } else {
