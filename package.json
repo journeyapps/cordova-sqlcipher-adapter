@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/journeyapps/cordova-sqlcipher-adapter.git"
+    "url": "git+https://github.com/journeyapps/cordova-sqlcipher-adapter.git"
   },
   "keywords": [
     "sqlite",
