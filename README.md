@@ -1,6 +1,8 @@
 # Fork of storesafe / cordova-sqlcipher-adapter
 
-Original can be found here: https://github.com/storesafe/cordova-sqlcipher-adapter
+Original can be found here: 
+  - https://github.com/storesafe/cordova-sqlcipher-adapter
+  - https://www.npmjs.com/package/cordova-sqlcipher-adapter
 
 # Cordova/PhoneGap SQLCipher adapter plugin - maintenance only
 
