@@ -1,3 +1,7 @@
+# Fork of storesafe / cordova-sqlcipher-adapter
+
+Original can be found here: https://github.com/storesafe/cordova-sqlcipher-adapter
+
 # Cordova/PhoneGap SQLCipher adapter plugin - maintenance only
 
 __Native interface__ to __SQLCipher version 4__ in a Cordova/PhoneGap plugin _with API based on HTML5/[Web SQL (DRAFT) API](http://www.w3.org/TR/webdatabase/) for the following platforms_:
